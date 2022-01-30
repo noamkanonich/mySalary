@@ -1,10 +1,16 @@
 import React from "react";
-import { SafeAreaView, View, Text, Image } from "react-native";
+import { SafeAreaView, View, Text, Image, Pressable } from "react-native";
 import styled from "styled-components/native";
+import { useNavigation } from "@react-navigation/native";
+
+interface HeaderProps {
+  navigation: NavigationType;
+}
 
 const Root = styled.SafeAreaView`
   justify-content: flex-start;
   padding: 10px 20px;
+  background-color: #22ce99;
 `;
 
 const Grid = styled.View`
@@ -13,6 +19,7 @@ const Grid = styled.View`
 `;
 
 const Header = () => {
+  const navigation = useNavigation();
   return (
     <Root>
       <Grid>
@@ -24,7 +31,7 @@ const Header = () => {
           />
         </View>
 
-        <View>
+        <Pressable onPress={() => navigation.navigate("Profile", {name: "username"})}>
           <Image
             style={{
               height: 60,
@@ -35,7 +42,7 @@ const Header = () => {
             }}
             source={require("../../../assets/images/profile.jpg")}
           />{" "}
-        </View>
+        </Pressable>
       </Grid>
     </Root>
   );
