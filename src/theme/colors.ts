@@ -1,3 +1,12 @@
 export const Primary = '#22ce99';
 export const DarkBlue = '#00192d';
-export const PiChartRed = 'red'
+export const LightGray = '#FAFBDF';
+export const Black = '#1E1F20'
+export const White = '#FFFFFF';
+export const DarkGray = '#898C95';
+export const Yellow = '#FFD573';
+export const LightBlue = '#95A9B8';
+export const DarkGreen = '#008159';
+export const Peach = '#FF615F';
+export const Purple = '#8e44ad';
+export const Red = '#FF0000';
