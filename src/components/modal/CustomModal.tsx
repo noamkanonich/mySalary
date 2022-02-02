@@ -37,7 +37,6 @@ const CustomModal = () => {
              alignSelf:'center',
              alignItems:'center',
              justifyContent:'center',
-             margin:20
            }}
            >
              <Image 
@@ -55,10 +54,9 @@ const styles = StyleSheet.create({
       marginTop: 22,
       zIndex: 10,
       position: 'absolute',
-      bottom:20,
+      bottom:0,
     },
     modalView: {
-      margin: 20,
       backgroundColor: "white",
       borderRadius: 20,
       padding: 35,

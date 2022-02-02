@@ -1,10 +1,17 @@
 import React from "react";
-import { SafeAreaView, View, Text, Image } from "react-native";
+import { SafeAreaView, View, Text, Image, Pressable } from "react-native";
 import styled from "styled-components/native";
+import { useNavigation } from "@react-navigation/native";
+import {Yellow, DarkBlue} from '../../theme/colors';
+
+interface HeaderProps {
+  navigation: NavigationType;
+}
 
 const Root = styled.SafeAreaView`
   justify-content: flex-start;
   padding: 10px 20px;
+  background-color: #22ce99;
 `;
 
 const Grid = styled.View`
@@ -12,7 +19,15 @@ const Grid = styled.View`
   justify-content: space-between;
 `;
 
+const ProfileAvatar = styled.Image<{hovered: boolean}>`
+  height: 60px;
+  width: 60px;
+  border-radius: 100;
+  border: solid 5px ${DarkBlue};
+`;
+
 const Header = () => {
+  const navigation = useNavigation();
   return (
     <Root>
       <Grid>
@@ -24,18 +39,13 @@ const Header = () => {
           />
         </View>
 
-        <View>
-          <Image
-            style={{
-              height: 60,
-              width: 60,
-              borderRadius: 100,
-              borderWidth: 5,
-              borderColor: "#00192D",
-            }}
+        <Pressable
+          onPress={() => navigation.navigate("Profile", { name: "username" })}
+        >
+          <ProfileAvatar
             source={require("../../../assets/images/profile.jpg")}
-          />{" "}
-        </View>
+          />
+        </Pressable>
       </Grid>
     </Root>
   );
