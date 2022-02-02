@@ -143,7 +143,7 @@ const HomeScreen = () => {
         </AddButton> */}
 
         <ScrollView
-          //   horizontal={true}
+          horizontal={true}
           showsVerticalScrollIndicator={false}
           //   style={{ marginHorizontal: "auto", width: "100%" }}
         >
@@ -200,10 +200,7 @@ const HomeScreen = () => {
                 </Row>
               )}
             </View>
-
-            
-          </View>
-          <AddButtonConteiner>
+            <AddButtonConteiner>
               <AddButton
                 onPress={() =>
                   navigation.navigate("Salary", { name: "Add Salary" })
@@ -212,7 +209,9 @@ const HomeScreen = () => {
                 <AddImage source={require("../../../assets/images/add.png")} />
               </AddButton>
             </AddButtonConteiner>
-          {/* <View>
+          </View>
+
+          <View>
             <Spacer size={"l"} direction={"vertical"} />
             <View
               style={{
@@ -224,7 +223,7 @@ const HomeScreen = () => {
               <Text>Pie Chart</Text>
             </View>
             <PieChart />
-          </View> */}
+          </View>
         </ScrollView>
       </BottomContainer>
     </Root>
