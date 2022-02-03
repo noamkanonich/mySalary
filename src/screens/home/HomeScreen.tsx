@@ -64,6 +64,7 @@ const Tabs = styled.View`
   flex-direction: row;
   justify-content: center;
   margin-vertical: 10;
+  width:100%;
 `;
 
 const TabItem = styled.Text<{ underline: boolean }>`
