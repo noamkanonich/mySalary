@@ -16,13 +16,13 @@ export type Size =
   | 'xxl-8';
 
 export const Spacing: {[size in Size]: number} = {
-  xxs: 4,
-  xs: 8,
-  s: 12,
-  m: 16,
-  l: 20,
-  xl: 24,
-  xxl: 28,
+  'xxs': 4,
+  'xs': 8,
+  's': 12,
+  'm': 16,
+  'l': 20,
+  'xl': 24,
+  'xxl': 28,
   'xxl-2': 32,
   'xxl-3': 40,
   'xxl-4': 48,

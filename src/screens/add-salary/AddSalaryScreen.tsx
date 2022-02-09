@@ -90,7 +90,7 @@ const AddSalaryScreen = () => {
           ></TextInput>
         </View>
 
-        <Picker
+        {/* <Picker
           selectedValue={selectedSalaryPeriod}
           onValueChange={(itemValue, itemIndex) =>
             setSelectedSalaryPeriod(itemValue)
@@ -105,7 +105,7 @@ const AddSalaryScreen = () => {
         >
           <Picker.Item label="Yearly" value="year" style={{ padding: 20 }} />
           <Picker.Item label="Monthly" value="month" />
-        </Picker>
+        </Picker> */}
       </BottomContainer>
     </Root>
   );

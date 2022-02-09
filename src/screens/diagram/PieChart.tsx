@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, View, Text, ScrollView } from "react-native";
+import {  Text, ScrollView } from "react-native";
 import styled from "styled-components/native";
 import { VictoryPie } from "victory-pie";
 import {
