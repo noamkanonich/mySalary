@@ -212,7 +212,7 @@ const AddButtonContainer = styled.View`
   flex: 1;
   justify-content: flex-end;
   align-items: center;
-  margin: 20px;
+  
 `;
 
 const AddButton = styled.Pressable<{ hovered: boolean }>`

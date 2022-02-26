@@ -3,7 +3,7 @@ import { SafeAreaView, View, Text, Image, Pressable } from "react-native";
 import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 import { Yellow, DarkBlue } from "../../theme/colors";
-import MenuDrawer from "../menu/MenuDrawer";
+import MenuDrawer from "../menu/drawer/MenuDrawer";
 interface HeaderProps {
   navigation: NavigationType;
 }
@@ -14,11 +14,6 @@ const Header = () => {
     <Root>
       <Grid>
         <>
-          {/* <Image
-            resizeMode="contain"
-            style={{ height: 50, width: 50 }}
-            source={require("../../../assets/images/menu.png")}
-          /> */}
           <MenuDrawer navigation={navigation} />
         </>
 

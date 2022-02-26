@@ -5,26 +5,6 @@ import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 import { DarkBlue, Primary, White, Yellow } from "../../theme/colors";
 
-const Root = styled.View`
-  flex: 1;
-  flex-direction: column;
-  background-color: ${Primary};
-`;
-
-const UpperContainer = styled.View`
-  flex: 0.1;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 20px;
-`;
-
-const BottomContainer = styled.View`
-  flex: 1;
-  background-color: ${White};
-  border-top-right-radius: 25px;
-  border-top-left-radius: 25px;
-  z-index: 1;
-`;
 
 const AddSalaryScreen = () => {
   const [selectedSalaryPeriod, setSelectedSalaryPeriod] = useState();
@@ -34,17 +14,11 @@ const AddSalaryScreen = () => {
     <Root>
       <UpperContainer>
         <Text>ADD SALARY</Text>
-        <Button
-          title={"Go Back To Home X"}
-          onPress={() => navigation.goBack()}
-        />
+       
       </UpperContainer>
       <BottomContainer>
         <Text>ADD SALARY</Text>
-        <Button
-          title={"Go Back To Home X"}
-          onPress={() => navigation.goBack()}
-        />
+        
 
         <View style={{ backgroundColor: "red", margin: 20 }}>
           <TextInput
@@ -110,5 +84,28 @@ const AddSalaryScreen = () => {
     </Root>
   );
 };
+
+const Root = styled.View`
+  flex: 1;
+  flex-direction: column;
+  background-color: ${Primary};
+`;
+
+const UpperContainer = styled.View`
+  flex: 0.1;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 20px;
+`;
+
+const BottomContainer = styled.View`
+  flex: 1;
+  padding: 20px;
+  background-color: ${White};
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  z-index: 1;
+`;
+
 
 export default AddSalaryScreen;
