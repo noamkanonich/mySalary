@@ -4,7 +4,7 @@ import React from 'react'
 const FooterMenu = () => {
   return (
     <View>
-      <Text>FooterMenu</Text>
+      <Text>Footer Tab Menu</Text>
     </View>
   )
 }

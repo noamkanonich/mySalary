@@ -22,12 +22,9 @@ export default function App() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Salary" component={AddSalaryScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
-        {/* <Stack.Screen name="Diagram" component={DiagramScreen} /> */}
-
       </Stack.Navigator>
-      {/* <FooterMenu/> */}
+      <FooterMenu/>
       </MenuProvider>
     </NavigationContainer>
-      // <Routes />
   );
 }
