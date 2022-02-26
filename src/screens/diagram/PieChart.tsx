@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, View, Text, ScrollView } from "react-native";
+import {  Text, ScrollView } from "react-native";
 import styled from "styled-components/native";
 import { VictoryPie } from "victory-pie";
 import {
@@ -13,6 +13,7 @@ import {
 import Spacer from "../spacer/Spacer";
 
 const Root = styled.View`
+
   justify-content: center;
   margin-horizontal: 20px;
 `;
@@ -41,7 +42,7 @@ const PieChart = () => {
     { x: "17%", y: 17 },
     { x: "23%", y: 23 },
     { x: "30%", y: 30 },
-    { x: "24%", y: 24 },
+    { x: "House", y: 10 },
     { x: "Gifts", y: 20 },
   ];
 

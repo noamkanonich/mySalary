@@ -3,21 +3,148 @@ import { View, Text, ScrollView, Pressable, Image } from "react-native";
 import styled from "styled-components/native";
 // import useLocalization from '../../lib/localization/LocalizationProvider';
 import { useNavigation } from "@react-navigation/native";
-import {
-  Primary,
-  DarkBlue,
-  Yellow,
-  White,
-  DarkGreen,
-} from "../../theme/colors";
+import { Primary, DarkBlue, White } from "../../theme/colors";
 import { TitleText, Tab } from "../../theme/typography";
 import Header from "../../components/header/Header";
 import PieChart from "../../components/chart/PieChart";
 import Spacer from "../../components/spacer/Spacer";
+import ModalWrapper from "./ModalWrapper";
 
-interface HomeProps {
-  // user: IUser,
+type ItemValue = number | string;
+interface HomeProps<T = ItemValue> {
+  salary: T | null;
 }
+
+const HomeScreen = ({ salary }: HomeProps) => {
+  const [onTodayTab, setOnTodayTab] = useState(true);
+  const [currenySalary, setCurrenySalary] = useState(null);
+  const navigation = useNavigation();
+
+  const onTabPressed = () => {
+    setOnTodayTab(!onTodayTab);
+  };
+
+  return (
+    <Root>
+      <UpperContainer>
+        <Title>MySalary</Title>
+        <Salary>$125,000</Salary>
+        <Date>March 18, 2022</Date>
+      </UpperContainer>
+      <BottomContainer>
+        {/* <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <View style={{ flexDirection: "column", marginHorizontal: "auto" }}>
+            <Text>TODAY MONTH</Text>
+            <Text>Today - Jan 30, 2022</Text>
+            <Text>Month - Jan 2022</Text>
+            <Text>Hourly Earn - $34.12</Text>
+            <Text>Daily Earn - $414.8</Text>
+            <Text>Pensia Earn - </Text>
+          </View>
+          <View>
+            <Text style={{ marginHorizontal: 150 }}>Diagram</Text>
+          </View>
+        </ScrollView>
+        <AddButton
+          onPress={() => navigation.navigate("Salary", { name: "Add Salary" })}
+        >
+          <AddImage
+            source={require("../../../assets/images/add.png")}
+          />
+        </AddButton> */}
+
+        <View
+          style={{
+            flex: 1,
+            width: "100%",
+            justifyContent: "flex-start",
+            padding: 10,
+            marginHorizontal: "auto",
+          }}
+        >
+          <Tabs>
+            <Pressable onPress={() => onTabPressed()}>
+              <TabItem
+                style={{
+                  paddingVertical: 5,
+                  borderBottomWidth: 4,
+                  borderBottomColor: onTodayTab ? "#00192d" : "#fff",
+                  color: onTodayTab ? "#00192D" : "#8e9aaf",
+                }}
+              >
+                TODAY
+              </TabItem>
+            </Pressable>
+            <Pressable onPress={() => onTabPressed()}>
+              <TabItem
+                style={{
+                  paddingVertical: 5,
+                  borderBottomWidth: 4,
+                  borderBottomColor: !onTodayTab ? "#00192d" : "#fff",
+                  color: !onTodayTab ? "#00192D" : "#8e9aaf",
+                }}
+              >
+                MONTH
+              </TabItem>
+            </Pressable>
+          </Tabs>
+
+          <Spacer size={"xl"} direction="vertical" />
+
+          <View style={{}}>
+            {onTodayTab ? (
+              <Row>
+                <Text>TODAY TODAY TODAY</Text>
+                <Text>Today - Jan 30, 2022</Text>
+              </Row>
+            ) : (
+              <Row>
+                <Text>MONTH MONTH MONTH</Text>
+                <Text>Month - Jan 2022</Text>
+              </Row>
+            )}
+          </View>
+
+          <ModalWrapper isVisible={true} setIsVisible={() => null}>
+            <>
+                {/* <Text>Custom Modal</Text> */}
+                <PieChart />
+                <Spacer direction="vertical" size="xxl" />
+            </>
+          </ModalWrapper>
+          <AddButtonContainer>
+            <AddButton
+              onPress={() =>
+                navigation.navigate("Salary", { name: "Add Salary" })
+              }
+            >
+              <AddImage source={require("../../../assets/images/add.png")} />
+            </AddButton>
+          </AddButtonContainer>
+        </View>
+
+        {/* <ScrollView
+          horizontal={true}
+          showsVerticalScrollIndicator={false}
+            style={{ marginHorizontal: "auto", width: "100%" }}
+        >  <View>
+            <Spacer size={"l"} direction={"vertical"} />
+            <View
+              style={{
+                width: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text>Pie Chart</Text>
+            </View>
+            <PieChart />
+          </View> 
+        </ScrollView> */}
+      </BottomContainer>
+    </Root>
+  );
+};
 
 const Root = styled.View`
   flex: 1;
@@ -64,6 +191,7 @@ const Tabs = styled.View`
   flex-direction: row;
   justify-content: center;
   margin-vertical: 10;
+  width: 100%;
 `;
 
 const TabItem = styled.Text<{ underline: boolean }>`
@@ -80,11 +208,11 @@ const Row = styled.View`
   justify-content: space-between;
 `;
 
-const AddButtonConteiner = styled.View`
+const AddButtonContainer = styled.View`
+  flex: 1;
   justify-content: flex-end;
   align-items: center;
-  padding: 10px;
-  margin: 20px;
+  
 `;
 
 const AddButton = styled.Pressable<{ hovered: boolean }>`
@@ -104,130 +232,5 @@ const AddImage = styled.Image`
   width: 40px;
   border-radius: 100px;
 `;
-
-const HomeScreen = () => {
-  const [onTodayTab, setOnTodayTab] = useState(true);
-  const navigation = useNavigation();
-
-  const onTabPressed = () => {
-    setOnTodayTab(!onTodayTab);
-  };
-
-  return (
-    <Root>
-      <UpperContainer>
-        <Title>MySalary</Title>
-        <Salary>$125,000</Salary>
-        <Date>March 18, 2022</Date>
-      </UpperContainer>
-      <BottomContainer>
-        {/* <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <View style={{ flexDirection: "column", marginHorizontal: "auto" }}>
-            <Text>TODAY MONTH</Text>
-            <Text>Today - Jan 30, 2022</Text>
-            <Text>Month - Jan 2022</Text>
-            <Text>Hourly Earn - $34.12</Text>
-            <Text>Daily Earn - $414.8</Text>
-            <Text>Pensia Earn - </Text>
-          </View>
-          <View>
-            <Text style={{ marginHorizontal: 150 }}>Diagram</Text>
-          </View>
-        </ScrollView>
-        <AddButton
-          onPress={() => navigation.navigate("Salary", { name: "Add Salary" })}
-        >
-          <AddImage
-            source={require("../../../assets/images/add.png")}
-          />
-        </AddButton> */}
-
-        <ScrollView
-          horizontal={true}
-          showsVerticalScrollIndicator={false}
-          //   style={{ marginHorizontal: "auto", width: "100%" }}
-        >
-          <View
-            style={{
-              flexDirection: "column",
-              justifyContent: "flex-start",
-              padding: 10,
-            }}
-          >
-            <Tabs>
-              <Pressable onPress={() => onTabPressed()}>
-                <TabItem
-                  style={{
-                    paddingVertical: 5,
-                    borderBottomWidth: 4,
-                    borderBottomColor: onTodayTab ? "#00192d" : "#fff",
-                    color: onTodayTab ? "#00192D" : "#8e9aaf",
-                  }}
-                >
-                  TODAY
-                </TabItem>
-              </Pressable>
-              <Pressable onPress={() => onTabPressed()}>
-                <TabItem
-                  style={{
-                    paddingVertical: 5,
-                    borderBottomWidth: 4,
-                    borderBottomColor: !onTodayTab ? "#00192d" : "#fff",
-                    color: !onTodayTab ? "#00192D" : "#8e9aaf",
-                  }}
-                >
-                  MONTH
-                </TabItem>
-              </Pressable>
-            </Tabs>
-
-            <Spacer size={"xl"} direction="vertical" />
-
-            <View
-              style={{
-                flex: 1,
-              }}
-            >
-              {onTodayTab ? (
-                <Row>
-                  <Text>TODAY TODAY TODAY</Text>
-                  <Text>Today - Jan 30, 2022</Text>
-                </Row>
-              ) : (
-                <Row>
-                  <Text>MONTH MONTH MONTH</Text>
-                  <Text>Month - Jan 2022</Text>
-                </Row>
-              )}
-            </View>
-            <AddButtonConteiner>
-              <AddButton
-                onPress={() =>
-                  navigation.navigate("Salary", { name: "Add Salary" })
-                }
-              >
-                <AddImage source={require("../../../assets/images/add.png")} />
-              </AddButton>
-            </AddButtonConteiner>
-          </View>
-
-          <View>
-            <Spacer size={"l"} direction={"vertical"} />
-            <View
-              style={{
-                width: "100%",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Text>Pie Chart</Text>
-            </View>
-            <PieChart />
-          </View>
-        </ScrollView>
-      </BottomContainer>
-    </Root>
-  );
-};
 
 export default HomeScreen;
