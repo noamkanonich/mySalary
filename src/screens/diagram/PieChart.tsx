@@ -13,7 +13,7 @@ import {
 import Spacer from "../spacer/Spacer";
 
 const Root = styled.View`
-  flex: 1;
+
   justify-content: center;
   margin-horizontal: 20px;
 `;

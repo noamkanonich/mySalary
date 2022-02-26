@@ -13,13 +13,16 @@ const Root = styled.View`
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
-//   const route = useRoute();
-//   console.log(route.params);
+  //   const route = useRoute();
+  //   console.log(route.params);
   return (
     <Root>
       <Text>ADD Info, job details and more</Text>
-      <Spacer size={'xxl-8'} direction="vertical"/>
-      <Button title={'Home Page'} onPress={() => navigation.goBack()}/>
+      <Spacer size={"xxl-8"} direction="vertical" />
+      <Button
+        title={"Home Page"}
+        onPress={() => navigation.navigate("Home")}
+      />
     </Root>
   );
 };

@@ -13,7 +13,6 @@ import {
 import Spacer from "../spacer/Spacer";
 
 const Root = styled.View`
-  flex: 1;
   justify-content: center;
   margin-horizontal: 20px;
 `;
@@ -42,7 +41,7 @@ const PieChart = () => {
     { x: "17%", y: 17 },
     { x: "23%", y: 23 },
     { x: "30%", y: 30 },
-    { x: "House", y: 10 },
+    { x: "24%", y: 24 },
     { x: "Gifts", y: 20 },
   ];
 

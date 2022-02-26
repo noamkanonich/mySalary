@@ -8,104 +8,16 @@ import { TitleText, Tab } from "../../theme/typography";
 import Header from "../../components/header/Header";
 import PieChart from "../../components/chart/PieChart";
 import Spacer from "../../components/spacer/Spacer";
-import Modal from "react-native-modal";
+import ModalWrapper from "./ModalWrapper";
 
 type ItemValue = number | string;
 interface HomeProps<T = ItemValue> {
   salary: T | null;
 }
 
-const Root = styled.View`
-  flex: 1;
-  flex-direction: column;
-  background-color: ${Primary};
-`;
-
-const UpperContainer = styled.View`
-  flex: 0.3;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 20px;
-`;
-
-const BottomContainer = styled.View`
-  flex: 0.7;
-  background-color: ${White};
-  border-top-right-radius: 25px;
-  border-top-left-radius: 25px;
-  z-index: 1;
-`;
-
-const Title = styled.Text`
-  font-size: 32px;
-  font-weight: bold;
-  align-self: center;
-  margin-vertical: 10px;
-  color: ${White};
-`;
-
-const Salary = styled.Text`
-  font-size: 56px;
-  font-weight: 700;
-  color: ${White};
-`;
-
-const Date = styled.Text`
-  font-size: 16px;
-  font-weight: 700;
-  color: ${DarkBlue};
-`;
-
-const Tabs = styled.View`
-  flex-direction: row;
-  justify-content: center;
-  margin-vertical: 10;
-  width: 100%;
-`;
-
-const TabItem = styled.Text<{ underline: boolean }>`
-  font-size: 18px;
-  font-weight: bold;
-  line-height: 16px;
-  margin-horizontal: 15px;
-  border-bottom: 5px solid red;
-  color: ${DarkBlue};
-`;
-
-const Row = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const AddButtonConteiner = styled.View`
-  justify-content: flex-end;
-  align-items: center;
-  padding: 10px;
-  margin: 20px;
-`;
-
-const AddButton = styled.Pressable<{ hovered: boolean }>`
-  height: 65px;
-  width: 65px;
-  background-color: ${DarkBlue};
-  border-radius: 80px;
-  align-self: center;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-`;
-//   background-color: ${({hovered}) => {(hovered ? 'red' : 'black')};
-
-const AddImage = styled.Image`
-  height: 40px;
-  width: 40px;
-  border-radius: 100px;
-`;
-
 const HomeScreen = ({ salary }: HomeProps) => {
   const [onTodayTab, setOnTodayTab] = useState(true);
   const [currenySalary, setCurrenySalary] = useState(null);
-  const [visible, setVisible] = useState(false);
   const navigation = useNavigation();
 
   const onTabPressed = () => {
@@ -192,7 +104,15 @@ const HomeScreen = ({ salary }: HomeProps) => {
               </Row>
             )}
           </View>
-          <AddButtonConteiner>
+
+          <ModalWrapper isVisible={true} setIsVisible={() => null}>
+            <>
+                {/* <Text>Custom Modal</Text> */}
+                <PieChart />
+                <Spacer direction="vertical" size="xxl" />
+            </>
+          </ModalWrapper>
+          <AddButtonContainer>
             <AddButton
               onPress={() =>
                 navigation.navigate("Salary", { name: "Add Salary" })
@@ -200,7 +120,7 @@ const HomeScreen = ({ salary }: HomeProps) => {
             >
               <AddImage source={require("../../../assets/images/add.png")} />
             </AddButton>
-          </AddButtonConteiner>
+          </AddButtonContainer>
         </View>
 
         {/* <ScrollView
@@ -225,5 +145,92 @@ const HomeScreen = ({ salary }: HomeProps) => {
     </Root>
   );
 };
+
+const Root = styled.View`
+  flex: 1;
+  flex-direction: column;
+  background-color: ${Primary};
+`;
+
+const UpperContainer = styled.View`
+  flex: 0.3;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 20px;
+`;
+
+const BottomContainer = styled.View`
+  flex: 0.7;
+  background-color: ${White};
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  z-index: 1;
+`;
+
+const Title = styled.Text`
+  font-size: 32px;
+  font-weight: bold;
+  align-self: center;
+  margin-vertical: 10px;
+  color: ${White};
+`;
+
+const Salary = styled.Text`
+  font-size: 56px;
+  font-weight: 700;
+  color: ${White};
+`;
+
+const Date = styled.Text`
+  font-size: 16px;
+  font-weight: 700;
+  color: ${DarkBlue};
+`;
+
+const Tabs = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  margin-vertical: 10;
+  width: 100%;
+`;
+
+const TabItem = styled.Text<{ underline: boolean }>`
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 16px;
+  margin-horizontal: 15px;
+  border-bottom: 5px solid red;
+  color: ${DarkBlue};
+`;
+
+const Row = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const AddButtonContainer = styled.View`
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 20px;
+`;
+
+const AddButton = styled.Pressable<{ hovered: boolean }>`
+  height: 65px;
+  width: 65px;
+  background-color: ${DarkBlue};
+  border-radius: 80px;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+`;
+//   background-color: ${({hovered}) => {(hovered ? 'red' : 'black')};
+
+const AddImage = styled.Image`
+  height: 40px;
+  width: 40px;
+  border-radius: 100px;
+`;
 
 export default HomeScreen;
