@@ -26,6 +26,7 @@ const HomeScreen = ({ salary }: HomeProps) => {
 
   return (
     <Root>
+      <Header/>
       <UpperContainer>
         <Title>MySalary</Title>
         <Salary>$125,000</Salary>
@@ -164,7 +165,12 @@ const BottomContainer = styled.View`
   background-color: ${White};
   border-top-right-radius: 25px;
   border-top-left-radius: 25px;
-  z-index: 1;
+  z-index: 10;
+  elevation: 10;
+  shadow-color: black;
+  shadow-opacity: 0.5;
+  shadow-radius: 12px;
+  shadow-offset: {width: 0px, height: 1px}
 `;
 
 const Title = styled.Text`

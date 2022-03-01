@@ -4,7 +4,7 @@ import { Picker } from "@react-native-picker/picker";
 import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 import { DarkBlue, Primary, White, Yellow } from "../../theme/colors";
-
+import Header from "../../components/header/Header";
 
 const AddSalaryScreen = () => {
   const [selectedSalaryPeriod, setSelectedSalaryPeriod] = useState();
@@ -12,6 +12,7 @@ const AddSalaryScreen = () => {
   const navigation = useNavigation();
   return (
     <Root>
+      <Header/>
       <UpperContainer>
         <Text>ADD SALARY</Text>
        
@@ -105,6 +106,12 @@ const BottomContainer = styled.View`
   border-top-right-radius: 25px;
   border-top-left-radius: 25px;
   z-index: 1;
+  z-index: 10;
+  elevation: 10;
+  shadow-color: black;
+  shadow-opacity: 0.5;
+  shadow-radius: 12px;
+  shadow-offset: {width: 0px, height: 1px}
 `;
 
 
