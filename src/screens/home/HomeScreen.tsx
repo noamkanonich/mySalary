@@ -8,7 +8,7 @@ import { TitleText, Tab } from "../../theme/typography";
 import Header from "../../components/header/Header";
 import PieChart from "../../components/chart/PieChart";
 import Spacer from "../../components/spacer/Spacer";
-import ModalWrapper from "./ModalWrapper";
+import ModalWrapper from "../../components/modal-wrapper/ModalWrapper";
 
 type ItemValue = number | string;
 interface HomeProps<T = ItemValue> {
@@ -17,7 +17,7 @@ interface HomeProps<T = ItemValue> {
 
 const HomeScreen = ({ salary }: HomeProps) => {
   const [onTodayTab, setOnTodayTab] = useState(true);
-  const [currenySalary, setCurrenySalary] = useState(null);
+  const [currentSalary, setCurrentSalary] = useState<string | undefined>();
   const navigation = useNavigation();
 
   const onTabPressed = () => {
@@ -106,7 +106,7 @@ const HomeScreen = ({ salary }: HomeProps) => {
             )}
           </View>
 
-          <ModalWrapper isVisible={true} setIsVisible={() => null}>
+          <ModalWrapper isVisible={false} setIsVisible={() => null}>
             <>
                 {/* <Text>Custom Modal</Text> */}
                 <PieChart />
@@ -116,7 +116,7 @@ const HomeScreen = ({ salary }: HomeProps) => {
           <AddButtonContainer>
             <AddButton
               onPress={() =>
-                navigation.navigate("Salary", { name: "Add Salary" })
+                navigation.navigate("Salary", { currentSalary: currentSalary, setCurrentSalary: setCurrentSalary })
               }
             >
               <AddImage source={require("../../../assets/images/add.png")} />

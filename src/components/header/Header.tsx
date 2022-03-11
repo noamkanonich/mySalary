@@ -1,17 +1,17 @@
 import React, {useState} from "react";
-import { Image, Pressable } from "react-native";
+import { Image, Pressable,Text } from "react-native";
 import styled from "styled-components/native";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
-import { Yellow, DarkBlue } from "../../theme/colors";
+import { Yellow, DarkBlue, White } from "../../theme/colors";
 import MenuDrawer from "../menu/drawer/MenuDrawer";
 import Drawer from "../../lib/navigation/Drawer";
 import { NavigationContainer } from "@react-navigation/native";
 
 interface HeaderProps {
-  navigation: NavigationType;
+  title?: string
 }
 
-const Header = () => {
+const Header = ({title}: HeaderProps) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const navigation = useNavigation();
   return (
@@ -25,6 +25,7 @@ const Header = () => {
             source={require("../../../assets/images/menu.png")}
           />
         </Pressable>
+        {title && <Title>{title}</Title>}
         <Pressable
           onPress={() => navigation.navigate("Profile", { name: "username" })}
         >
@@ -44,6 +45,14 @@ const Root = styled.View`
   z-index:-10;
   elevation:-10;
  
+`;
+
+const Title = styled.Text`
+  font-size: 24px;
+  font-weight: bold;
+  align-self: center;
+  margin-vertical: 10px;
+  color: ${White};
 `;
 
 const Grid = styled.View`

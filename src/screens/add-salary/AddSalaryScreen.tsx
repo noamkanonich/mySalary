@@ -1,35 +1,37 @@
 import React, { useState } from "react";
-import { View, Text, Button, TextInput } from "react-native";
-import { Picker } from "@react-native-picker/picker";
+import { View, Text, TextInput, Pressable } from "react-native";
 import styled from "styled-components/native";
-import { useNavigation } from "@react-navigation/native";
-import { DarkBlue, Primary, White, Yellow } from "../../theme/colors";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { Primary, White, Yellow } from "../../theme/colors";
 import Header from "../../components/header/Header";
+import Spacer from "../../components/spacer/Spacer";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const AddSalaryScreen = () => {
   const [selectedSalaryPeriod, setSelectedSalaryPeriod] = useState();
+  const [currentSalary, setCurrentSalary] = useState<string | undefined>();
 
   const navigation = useNavigation();
+  const route = useRoute();
+  const onChange = (value: string) => {
+    setCurrentSalary(value)
+  }
+  console.log(currentSalary)
+
   return (
     <Root>
-      <Header/>
       <UpperContainer>
-        <Text>ADD SALARY</Text>
-       
+        <>
+          <Pressable onPress={() => navigation.goBack()}>
+            <Ionicons name="chevron-back-outline" size={28} color={"black"} />
+          </Pressable>
+        </>
+        <Spacer direction="vertical" size="xl" />
+        <Title>Add Salary</Title>
       </UpperContainer>
       <BottomContainer>
         <Text>ADD SALARY</Text>
-        
-
-        <View style={{ backgroundColor: "red", margin: 20 }}>
-          <TextInput
-            style={{
-              padding: 10,
-              borderBottomWidth: 10,
-              borderBottomColor: "blue",
-            }}
-          />
-        </View>
+        <Spacer direction="vertical" size="xxl" />
 
         <View style={{ flexDirection: "row", marginHorizontal: "auto" }}>
           <View
@@ -62,25 +64,13 @@ const AddSalaryScreen = () => {
               borderBottomWidth: 2,
               borderBottomColor: "#000",
             }}
+            onChangeText={(value:string) => onChange(value)}
           ></TextInput>
         </View>
-
-        {/* <Picker
-          selectedValue={selectedSalaryPeriod}
-          onValueChange={(itemValue, itemIndex) =>
-            setSelectedSalaryPeriod(itemValue)
-          }
-          style={{
-            marginHorizontal: "auto",
-            padding: 10,
-            borderColor: Yellow,
-            borderWidth: 0,
-            borderBottomWidth: 3,
-          }}
-        >
-          <Picker.Item label="Yearly" value="year" style={{ padding: 20 }} />
-          <Picker.Item label="Monthly" value="month" />
-        </Picker> */}
+        <Text>{currentSalary}</Text>
+        <Pressable onPress={() => null}>
+          <Text>Submit</Text>
+        </Pressable>
       </BottomContainer>
     </Root>
   );
@@ -92,11 +82,19 @@ const Root = styled.View`
   background-color: ${Primary};
 `;
 
+const Title = styled.Text`
+  font-size: 32px;
+  font-weight: bold;
+  align-self: center;
+  margin-vertical: 10px;
+  color: ${White};
+`;
+
 const UpperContainer = styled.View`
-  flex: 0.1;
+  flex: 0.2;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 20px;
+  padding: 20px 10px;
 `;
 
 const BottomContainer = styled.View`
@@ -105,7 +103,6 @@ const BottomContainer = styled.View`
   background-color: ${White};
   border-top-right-radius: 25px;
   border-top-left-radius: 25px;
-  z-index: 1;
   z-index: 10;
   elevation: 10;
   shadow-color: black;
@@ -113,6 +110,5 @@ const BottomContainer = styled.View`
   shadow-radius: 12px;
   shadow-offset: {width: 0px, height: 1px}
 `;
-
 
 export default AddSalaryScreen;
