@@ -1,58 +1,65 @@
-import React, { useState } from "react";
-import { View, Text, ScrollView, Pressable, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, Pressable } from "react-native";
 import styled from "styled-components/native";
-// import useLocalization from '../../lib/localization/LocalizationProvider';
 import { useNavigation } from "@react-navigation/native";
 import { Primary, DarkBlue, White } from "../../theme/colors";
-import { TitleText, Tab } from "../../theme/typography";
 import Header from "../../components/header/Header";
 import PieChart from "../../components/chart/PieChart";
 import Spacer from "../../components/spacer/Spacer";
-import ModalWrapper from "./ModalWrapper";
+import ModalWrapper from "../../components/modal-wrapper/ModalWrapper";
+import moment from "moment";
+import useExpanses from "../../hooks/use-expanses/useExpanses";
+import useAuth from "../../hooks/use-auth/useAuth";
+import uuid from "react-native-uuid";
+import { IExpense } from "../../lib/data/IExpense";
 
 type ItemValue = number | string;
+
 interface HomeProps<T = ItemValue> {
   salary: T | null;
 }
 
-const HomeScreen = ({ salary }: HomeProps) => {
+const HomeScreen = () => {
   const [onTodayTab, setOnTodayTab] = useState(true);
-  const [currenySalary, setCurrenySalary] = useState(null);
+  const [expansesList, setExpansesList] = useState<IExpense[] | undefined>()
+  const { totalExpanses, setTotalExpanses } = useExpanses();
+  const { user, setUser } = useAuth();
+
   const navigation = useNavigation();
 
   const onTabPressed = () => {
     setOnTodayTab(!onTodayTab);
   };
 
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      setUser(userId);
+    } else {
+      setUser(uuid.v4())
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log(totalExpanses)
+    if(localStorage.getItem('totalExpanses')){
+      setTotalExpanses(localStorage.getItem('totalExpanses'))
+    }
+  }, [totalExpanses]);
+
+  let dateTime = Date.now();
+
   return (
     <Root>
+      <Header />
       <UpperContainer>
         <Title>MySalary</Title>
-        <Salary>$125,000</Salary>
-        <Date>March 18, 2022</Date>
+        <Salary>${totalExpanses || 0}</Salary> 
+        <DateText>{moment().format("DD.MM.YYYY")}</DateText>
+        <Spacer direction="vertical" size="l" />
+        <Text>Total Expanses - {totalExpanses}</Text>
       </UpperContainer>
       <BottomContainer>
-        {/* <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <View style={{ flexDirection: "column", marginHorizontal: "auto" }}>
-            <Text>TODAY MONTH</Text>
-            <Text>Today - Jan 30, 2022</Text>
-            <Text>Month - Jan 2022</Text>
-            <Text>Hourly Earn - $34.12</Text>
-            <Text>Daily Earn - $414.8</Text>
-            <Text>Pensia Earn - </Text>
-          </View>
-          <View>
-            <Text style={{ marginHorizontal: 150 }}>Diagram</Text>
-          </View>
-        </ScrollView>
-        <AddButton
-          onPress={() => navigation.navigate("Salary", { name: "Add Salary" })}
-        >
-          <AddImage
-            source={require("../../../assets/images/add.png")}
-          />
-        </AddButton> */}
-
         <View
           style={{
             flex: 1,
@@ -105,19 +112,22 @@ const HomeScreen = ({ salary }: HomeProps) => {
             )}
           </View>
 
-          <ModalWrapper isVisible={true} setIsVisible={() => null}>
+          <ModalWrapper isVisible={false} setIsVisible={() => null}>
             <>
-                {/* <Text>Custom Modal</Text> */}
-                <PieChart />
-                <Spacer direction="vertical" size="xxl" />
+              {/* <Text>Custom Modal</Text> */}
+              <PieChart />
+              <Spacer direction="vertical" size="xxl" />
             </>
           </ModalWrapper>
           <AddButtonContainer>
-            <AddButton
+            {/* <AddButton
               onPress={() =>
-                navigation.navigate("Salary", { name: "Add Salary" })
+                navigation.navigate("Expanses", { currentSalary: currentSalary, setCurrentSalary: setCurrentSalary })
               }
             >
+              <AddImage source={require("../../../assets/images/add.png")} />
+            </AddButton> */}
+            <AddButton onPress={() => navigation.navigate("Expanses", {screens: "Main", params: {expansesList: expansesList}})}>
               <AddImage source={require("../../../assets/images/add.png")} />
             </AddButton>
           </AddButtonContainer>
@@ -164,7 +174,12 @@ const BottomContainer = styled.View`
   background-color: ${White};
   border-top-right-radius: 25px;
   border-top-left-radius: 25px;
-  z-index: 1;
+  z-index: 10;
+  elevation: 10;
+  shadow-color: black;
+  shadow-opacity: 0.5;
+  shadow-radius: 12px;
+  shadow-offset: {width: 0px, height: 1px}
 `;
 
 const Title = styled.Text`
@@ -181,7 +196,7 @@ const Salary = styled.Text`
   color: ${White};
 `;
 
-const Date = styled.Text`
+const DateText = styled.Text`
   font-size: 16px;
   font-weight: 700;
   color: ${DarkBlue};
@@ -212,7 +227,6 @@ const AddButtonContainer = styled.View`
   flex: 1;
   justify-content: flex-end;
   align-items: center;
-  
 `;
 
 const AddButton = styled.Pressable<{ hovered: boolean }>`

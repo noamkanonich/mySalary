@@ -1,33 +1,25 @@
-import { View, Text } from "react-native";
+import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Routes from "./src/lib/navigation/Routes";
-import HomeScreen from "./src/screens/home/HomeScreen";
-import AddSalaryScreen from "./src/screens/add-salary/AddSalaryScreen";
-import ProfileScreen from "./src/screens/profile/ProfileScreen";
-import { MenuProvider } from 'react-native-popup-menu';
-import FooterMenu from "./src/components/menu/Footer/FooterMenu";
-import Header from "./src/components/header/Header";
+import Drawer from "./src/lib/navigation/Drawer";
+import ExpansesProvider from "./src/hooks/use-expanses/ExpansesProvider";
+import AuthProvider from "./src/hooks/use-auth/AuthProvider";
+
 const Stack = createNativeStackNavigator();
 const screenOptionStyle = {
   headerShown: false,
 };
 
-export default function App() {  
-  return (
-    <NavigationContainer>
-      <MenuProvider>
-      <Header />
-      <Stack.Navigator initialRouteName="Home"  screenOptions={screenOptionStyle}>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Salary" component={AddSalaryScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-        {/* <Stack.Screen name="Diagram" component={DiagramScreen} /> */}
+// get user id (uuid.v4) from local storage and upload data
 
-      </Stack.Navigator>
-      {/* <FooterMenu/> */}
-      </MenuProvider>
-    </NavigationContainer>
-      // <Routes />
+export default function App() {
+  return (
+    <AuthProvider>
+      <ExpansesProvider>
+        <NavigationContainer>
+          <Drawer />
+        </NavigationContainer>
+      </ExpansesProvider>
+    </AuthProvider>
   );
 }

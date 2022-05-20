@@ -13,3 +13,11 @@ export const Tab = styled.Text`
     line-height: 16px;
     ${DarkBlue}
 `;
+
+export const DrawerTab = styled.Text`
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 16px;
+    ${DarkBlue}
+`;
+

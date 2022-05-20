@@ -45,14 +45,14 @@ const MenuDrawer = ({ navigation }: IMenu) => {
             </View>
           </MenuOption>
 
-          <MenuOption onSelect={() => navigation.navigate("Salary")}>
+          <MenuOption onSelect={() => navigation.navigate("Expanses")}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Image
                 style={{ height: 20, width: 20 }}
                 source={require("../../../../assets/images/plus.png")}
               />
               <Spacer direction='horizontal' size='xs'/>
-              <Text>Add Salary</Text>
+              <Text>Add Expanses</Text>
             </View>
           </MenuOption>
 
@@ -67,7 +67,7 @@ const MenuDrawer = ({ navigation }: IMenu) => {
             </View>
           </MenuOption>
 
-          <MenuOption onSelect={() => navigation.navigate("Salary")}>
+          <MenuOption onSelect={() => navigation.navigate("Expanses")}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Image
                 style={{ height: 20, width: 20 }}

@@ -1,22 +1,30 @@
-import React from "react";
-import { SafeAreaView, View, Text, Image, Pressable } from "react-native";
+import React, {useState} from "react";
+import { Image, Pressable,Text } from "react-native";
 import styled from "styled-components/native";
-import { useNavigation } from "@react-navigation/native";
-import { Yellow, DarkBlue } from "../../theme/colors";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
+import { Yellow, DarkBlue, White } from "../../theme/colors";
 import MenuDrawer from "../menu/drawer/MenuDrawer";
+import Drawer from "../../lib/navigation/Drawer";
+import { NavigationContainer } from "@react-navigation/native";
+
 interface HeaderProps {
-  navigation: NavigationType;
+  title?: string
 }
 
-const Header = () => {
+const Header = ({title}: HeaderProps) => {
+  const [drawerOpen, setDrawerOpen] = useState(false)
   const navigation = useNavigation();
   return (
     <Root>
       <Grid>
-        <>
-          <MenuDrawer navigation={navigation} />
-        </>
-
+        <Pressable onPress={() => navigation.dispatch( DrawerActions.openDrawer())}>
+          <Image
+            resizeMode="contain"
+            style={{ height: 50, width: 50 }}
+            source={require("../../../assets/images/menu.png")}
+          />
+        </Pressable>
+        {title && <Title>{title}</Title>}
         <Pressable
           onPress={() => navigation.navigate("Profile", { name: "username" })}
         >
@@ -29,10 +37,21 @@ const Header = () => {
   );
 };
 
-const Root = styled.SafeAreaView`
+const Root = styled.View`
   justify-content: flex-start;
   padding: 10px 20px;
   background-color: #22ce99;
+  z-index:-10;
+  elevation:-10;
+ 
+`;
+
+const Title = styled.Text`
+  font-size: 24px;
+  font-weight: bold;
+  align-self: center;
+  margin-vertical: 10px;
+  color: ${White};
 `;
 
 const Grid = styled.View`

@@ -1,23 +1,22 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import ExpansesScreen from "../../screens/expanses/ExpansesScreen";
 import HomeScreen from "../../screens/home/HomeScreen";
 
-const Stack = createNativeStackNavigator();
+const RootStack = createNativeStackNavigator();
 
 const screenOptionStyle = {
-    headerShown: false,
+  headerShown: false,
 };
 
 const Route = () => {
-    return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home"  screenOptions={screenOptionStyle}>
-                <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen name="Profile" component={HomeScreen} />
-            </Stack.Navigator>
-        </NavigationContainer>
-
-    )
-}
+  return (
+    <RootStack.Navigator initialRouteName="Home" screenOptions={screenOptionStyle}>
+      <RootStack.Screen name="Home" component={HomeScreen} />
+      <RootStack.Screen name="Profile" component={HomeScreen} />
+      <RootStack.Screen name="Expanses" component={ExpansesScreen} />
+    </RootStack.Navigator>
+  );
+};
 
 export default Route;
