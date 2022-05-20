@@ -15,8 +15,7 @@ import ExpanseItem from "./ExpanseItem";
 
 const expansesData = [
   {
-    // id: uuid.v4(),
-    id: "1",
+    id: uuid.v4() as string,
     title: "Supermarket",
     category: "Food",
     expanse: "560",
@@ -24,8 +23,7 @@ const expansesData = [
     date: new Date("20/11/21"),
   },
   {
-    // id: uuid.v4(),
-    id: "2",
+    id: uuid.v4() as string,
     title: "Movie",
     category: "Pleasure",
     expanse: "120",
@@ -70,7 +68,7 @@ const ExpansesScreen = ({
     if (!expansesList) {
       setExpansesList([
         {
-          id: title,
+          id: uuid.v4() as string,
           title: title,
           category: category,
           expanse: newExpanse,
@@ -82,7 +80,7 @@ const ExpansesScreen = ({
       const updatedExpanses = [
         ...expansesList,
         {
-          id: title,
+          id: uuid.v4() as string,
           title: title,
           category: category,
           expanse: newExpanse,
