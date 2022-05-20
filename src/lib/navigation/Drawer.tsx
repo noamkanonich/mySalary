@@ -1,11 +1,8 @@
-import { View, Text } from "react-native";
 import React, { useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
-
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import HomeScreen from "../../screens/home/HomeScreen";
 import ProfileScreen from "../../screens/profile/ProfileScreen";
-import AddSalaryScreen from "../../screens/add-salary/AddSalaryScreen";
+import ExpansesScreen from "../../screens/expanses/ExpansesScreen";
 import CustomDrawer from "../../components/drawer/CustomDrawer";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import JobsScreen from "../../screens/jobs/JobsScreen";
@@ -54,8 +51,8 @@ const DrawerContent = () => {
       )}
       {isLoggedIn && (
         <Drawer.Screen
-          name="Salary"
-          component={AddSalaryScreen}
+          name="Expanses"
+          component={ExpansesScreen}
           options={{
             drawerIcon: ({ color }) => (
               <Ionicons name="wallet-outline" size={22} color={color} />
@@ -77,7 +74,7 @@ const DrawerContent = () => {
       {isLoggedIn && (
         <Drawer.Screen
           name="Messages"
-          component={AddSalaryScreen}
+          component={ExpansesScreen}
           options={{
             drawerIcon: ({ color }) => (
               <Ionicons

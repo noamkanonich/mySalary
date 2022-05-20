@@ -17,7 +17,6 @@ const Header = ({title}: HeaderProps) => {
   return (
     <Root>
       <Grid>
-        {/* <MenuDrawer navigation={navigation} /> */}
         <Pressable onPress={() => navigation.dispatch( DrawerActions.openDrawer())}>
           <Image
             resizeMode="contain"

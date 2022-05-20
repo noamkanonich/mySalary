@@ -1,15 +1,12 @@
-import { View, Text, Pressable, Image, StyleSheet } from "react-native";
+import { View, Text, Pressable, Image } from "react-native";
 import React from "react";
 import {
   DrawerContentScrollView,
   DrawerItemList,
-  DrawerHeaderProps,
 } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
 import Spacer from "../spacer/Spacer";
-import LinearGradient from "react-native-linear-gradient";
-import { Tab } from "../../theme/typography";
 import { DarkGray, LightGray } from "../../theme/colors";
 
 const CustomDrawer = (props: any) => {
@@ -24,14 +21,8 @@ const CustomDrawer = (props: any) => {
         {...props}
         contentContainerStyle={{ backgroundColor: "white" }}
       >
-        {/* <LinearGradient
-          colors={["#4c669f", "#3b5998", "#192f6a"]}
-          style={styles.linearGradient}
-        >
-          <Text style={styles.buttonText}>Sign in with Facebook</Text>
-        </LinearGradient> */}
         <Image
-          source={require("../../../assets/images/profile.jpg")}
+          source={require("../../../assets/images/background.jpg")}
           style={{ width: "100%", height: 250 }}
         />
         <Spacer direction="vertical" size="xxl" />

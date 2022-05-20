@@ -1,9 +1,9 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import AddSalaryScreen from "../../screens/add-salary/AddSalaryScreen";
+import ExpansesScreen from "../../screens/expanses/ExpansesScreen";
 import HomeScreen from "../../screens/home/HomeScreen";
 
-const Stack = createNativeStackNavigator();
+const RootStack = createNativeStackNavigator();
 
 const screenOptionStyle = {
   headerShown: false,
@@ -11,11 +11,11 @@ const screenOptionStyle = {
 
 const Route = () => {
   return (
-    <Stack.Navigator initialRouteName="Home" screenOptions={screenOptionStyle}>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Profile" component={HomeScreen} />
-      <Stack.Screen name="Salary" component={AddSalaryScreen} />
-    </Stack.Navigator>
+    <RootStack.Navigator initialRouteName="Home" screenOptions={screenOptionStyle}>
+      <RootStack.Screen name="Home" component={HomeScreen} />
+      <RootStack.Screen name="Profile" component={HomeScreen} />
+      <RootStack.Screen name="Expanses" component={ExpansesScreen} />
+    </RootStack.Navigator>
   );
 };
 

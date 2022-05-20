@@ -40,6 +40,7 @@ const SettingsScreen = () => {
               <Spacer size="xl" direction="vertical" />
               <>
                 <Label>Date birth</Label>
+                
                 <Text>18/03/1992</Text>
               </>
               <Spacer size="xl" direction="vertical" />

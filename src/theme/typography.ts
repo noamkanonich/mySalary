@@ -20,3 +20,4 @@ export const DrawerTab = styled.Text`
     line-height: 16px;
     ${DarkBlue}
 `;
+
